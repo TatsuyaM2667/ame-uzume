@@ -1,6 +1,6 @@
 # ame-uzume
 
-音量を読む・変える・消音・見張る小さなコマンド(Odin。wpctl・pactl subscribe の代わり)。
+音量を読む・変える・消音・見張る・出力先を選ぶ小さなコマンド(Odin。wpctl・pactl の代わり)。
 
 [ame-shell](https://github.com/TatsuyaM2667/ame-shell)(Wayland のデスクトップシェル)の一部を、単独で使えるように切り出したものです。
 ame-shell は画面の要らない仕事を、1 つのことをして標準入出力でやりとりする小さなコマンドに分けています。これはその 1 つです。
@@ -8,7 +8,7 @@ ame-shell は画面の要らない仕事を、1 つのことをして標準入�
 ## 使い方
 
 ```text
-ame-uzume: 音量を読む / 変える / 見張る(wpctl・pactl の代わり)。
+ame-uzume: 音量を読む / 変える / 見張る・出力先と入力先を選ぶ(wpctl・pactl の代わり)。
 名前は天岩戸の前で舞い、音を鳴らした芸能の神、天宇受売命(あめのうずめ)から。
 
   ame-uzume                  今の音量を 1 行(「45」、消音なら「45 muted」)
@@ -16,6 +16,9 @@ ame-uzume: 音量を読む / 変える / 見張る(wpctl・pactl の代わり)�
   ame-uzume mute [on|off]    消音を切り替える(on / off で決め打ち)
   ame-uzume restore          最後に set / mute した音量に戻す(ログインのとき)
   ame-uzume watch            今の音量を 1 行、その後は変わるたびに 1 行(終わらない)
+  ame-uzume list sinks       出力先の一覧(名前<TAB>説明<TAB>既定なら *)。sources で入力先
+  ame-uzume use sink 名前    既定の出力先にし、流れている音も移す(source で入力先)
+  ame-uzume list cards       音のカードの一覧 / ame-uzume profile カード プロファイル  カードのプロファイルを変える
 
 相手は既定の出力(@DEFAULT_SINK@)。PulseAudio の口(PipeWire なら pipewire-pulse)に libpulse で話す。
 libpulse は実行時に読む(ヘッダも -dev パッケージも要らない。無ければ 1 で終わる)。
